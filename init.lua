@@ -168,50 +168,74 @@ vim.opt.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- [[ Change original w and b behavior to Colemak-DH ]]
+-- Save the original 'w' and 'b' commands to temporary placeholder mappings
+vim.keymap.set('n', '<Plug>OriginalWordForward', 'w', { remap = false, silent = true })
+vim.keymap.set('n', '<Plug>OriginalWordBackward', 'b', { remap = false, silent = true })
+vim.keymap.set('v', '<Plug>OriginalWordForward', 'w', { remap = false, silent = true })
+vim.keymap.set('v', '<Plug>OriginalWordBackward', 'b', { remap = false, silent = true })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+vim.keymap.set('n', '<Plug>OriginalWORDForward', 'W', { remap = false, silent = true })
+vim.keymap.set('n', '<Plug>OriginalWORDBackward', 'B', { remap = false, silent = true })
+vim.keymap.set('v', '<Plug>OriginalWORDForward', 'W', { remap = false, silent = true })
+vim.keymap.set('v', '<Plug>OriginalWORDBackward', 'B', { remap = false, silent = true })
+
+-- Replace w and W behavior to b and B
+vim.keymap.set('n', 'w', '<Plug>OriginalWordBackward', { remap = false })
+vim.keymap.set('n', 'W', '<Plug>OriginalWORDBackward', { remap = false })
+vim.keymap.set('v', 'w', '<Plug>OriginalWordBackward', { remap = false })
+vim.keymap.set('v', 'W', '<Plug>OriginalWORDBackward', { remap = false })
+
+-- Replace b and B behavior to w and W
+vim.keymap.set('n', 'b', '<Plug>OriginalWordForward', { remap = false })
+vim.keymap.set('n', 'B', '<Plug>OriginalWORDForward', { remap = false })
+vim.keymap.set('v', 'b', '<Plug>OriginalWordForward', { remap = false })
+vim.keymap.set('v', 'B', '<Plug>OriginalWORDForward', { remap = false })
+
+-- diagnostic keymaps
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'open diagnostic [q]uickfix list' })
+
+-- exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- for people to discover. otherwise, you normally need to press <c-\><c-n>, which
 -- is not what someone will guess without a bit more experience.
 --
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- note: this won't work in all terminal emulators/tmux/etc. try your own mapping
+-- or just use <c-\><c-n> to exit terminal mode
+vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- tip: disable arrow keys in normal mode
+-- vim.keymap.set('n', '<left>', '<cmd>echo "use h to move!!"<cr>')
+-- vim.keymap.set('n', '<right>', '<cmd>echo "use l to move!!"<cr>')
+-- vim.keymap.set('n', '<up>', '<cmd>echo "use k to move!!"<cr>')
+-- vim.keymap.set('n', '<down>', '<cmd>echo "use j to move!!"<cr>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
+-- keybinds to make split navigation easier.
+--  use ctrl+<hjkl> to switch between windows
 --
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+--  see `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<c-h>', '<c-w><c-h>', { desc = 'move focus to the left window' })
+vim.keymap.set('n', '<c-l>', '<c-w><c-l>', { desc = 'move focus to the right window' })
+vim.keymap.set('n', '<c-j>', '<c-w><c-j>', { desc = 'move focus to the lower window' })
+vim.keymap.set('n', '<c-k>', '<c-w><c-k>', { desc = 'move focus to the upper window' })
 
--- NOTE: Some terminals have coliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+-- note: some terminals have coliding keymaps or are not able to send distinct keycodes
+-- vim.keymap.set("n", "<c-s-h>", "<c-w>h", { desc = "move window to the left" })
+-- vim.keymap.set("n", "<c-s-l>", "<c-w>l", { desc = "move window to the right" })
+-- vim.keymap.set("n", "<c-s-j>", "<c-w>j", { desc = "move window to the lower" })
+-- vim.keymap.set("n", "<c-s-k>", "<c-w>k", { desc = "move window to the upper" })
 
--- Remap <C-b> and <C-f> and center view
-vim.keymap.set('n', '<C-f>', '<C-f>zz', { silent = true })
-vim.keymap.set('n', '<C-b>', '<C-b>zz', { silent = true })
+-- remap <c-b> and <c-f> and center view
+vim.keymap.set('n', '<c-f>', '<c-f>zz', { silent = true })
+vim.keymap.set('n', '<c-b>', '<c-b>zz', { silent = true })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+-- [[ basic autocommands ]]
+--  see `:help lua-guide-autocommands`
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
+-- highlight when yanking (copying) text
+--  try it with `yap` in normal mode
+--  see `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('textyankpost', {
+  desc = 'highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
