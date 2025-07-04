@@ -922,9 +922,9 @@ require('lazy').setup({
       }
 
       -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'onedark_dark'
+      vim.api.nvim_set_hl(0, 'StatusLine', { bg = '#2d2d2d' })
+      vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = '#222222' })
     end,
   },
 
