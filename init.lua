@@ -315,10 +315,10 @@ require('lazy').setup({
 
   {
     'kylechui/nvim-surround',
-    version = 'main', -- Use for stability; omit to use `main` branch for the latest features
+    version = '^3.0.0',
     event = 'VeryLazy',
     config = function()
-      require('nvim-surround').setup()
+      require('nvim-surround').setup {}
     end,
   },
 
