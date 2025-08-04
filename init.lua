@@ -434,6 +434,23 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      default_file_explorer = true,
+      keymaps = {
+        ["'"] = { 'actions.cd', mode = 'n' },
+        ['#'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
+      },
+    },
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    lazy = false,
+
+    vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' }),
+  },
+
   -- LSP Plugins
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
