@@ -4,6 +4,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Highlight undotree when it is opened
+vim.g.undotree_SetFocusWhenToggle = 1
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -94,13 +97,13 @@ vim.keymap.set('n', '<Plug>OriginalWORDBackward', 'B', { remap = false, silent =
 vim.keymap.set('v', '<Plug>OriginalWORDForward', 'W', { remap = false, silent = true })
 vim.keymap.set('v', '<Plug>OriginalWORDBackward', 'B', { remap = false, silent = true })
 
--- Replace w and W behavior to b and B
+-- -- Replace w and W behavior to b and B
 vim.keymap.set('n', 'w', '<Plug>OriginalWordBackward', { remap = false })
 vim.keymap.set('n', 'W', '<Plug>OriginalWORDBackward', { remap = false })
 vim.keymap.set('v', 'w', '<Plug>OriginalWordBackward', { remap = false })
 vim.keymap.set('v', 'W', '<Plug>OriginalWORDBackward', { remap = false })
 
--- Replace b and B behavior to w and W
+-- -- Replace b and B behavior to w and W
 vim.keymap.set('n', 'b', '<Plug>OriginalWordForward', { remap = false })
 vim.keymap.set('n', 'B', '<Plug>OriginalWORDForward', { remap = false })
 vim.keymap.set('v', 'b', '<Plug>OriginalWordForward', { remap = false })
@@ -127,10 +130,10 @@ vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'exit terminal mode' }
 --  use ctrl+<hjkl> to switch between windows
 --
 --  see `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<c-h>', '<c-w><c-h>', { desc = 'move focus to the left window' })
-vim.keymap.set('n', '<c-l>', '<c-w><c-l>', { desc = 'move focus to the right window' })
-vim.keymap.set('n', '<c-j>', '<c-w><c-j>', { desc = 'move focus to the lower window' })
-vim.keymap.set('n', '<c-k>', '<c-w><c-k>', { desc = 'move focus to the upper window' })
+vim.keymap.set('n', '<M-Left>', '<c-w><c-h>', { desc = 'move focus to the left window' })
+vim.keymap.set('n', '<M-Right>', '<c-w><c-l>', { desc = 'move focus to the right window' })
+vim.keymap.set('n', '<M-Down>', '<c-w><c-j>', { desc = 'move focus to the lower window' })
+vim.keymap.set('n', '<M-Up>', '<c-w><c-k>', { desc = 'move focus to the upper window' })
 
 -- note: some terminals have coliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<c-s-h>", "<c-w>h", { desc = "move window to the left" })
@@ -434,6 +437,7 @@ require('lazy').setup({
     end,
   },
 
+  -- Oil.nvim for handling files easier.
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
@@ -449,6 +453,13 @@ require('lazy').setup({
     lazy = false,
 
     vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' }),
+  },
+
+  -- Undotree, got issus with the preview window. Check later.
+  {
+    'mbbill/undotree',
+
+    vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndo tree' }),
   },
 
   -- LSP Plugins
