@@ -97,17 +97,20 @@ vim.keymap.set('n', '<Plug>OriginalWORDBackward', 'B', { remap = false, silent =
 vim.keymap.set('v', '<Plug>OriginalWORDForward', 'W', { remap = false, silent = true })
 vim.keymap.set('v', '<Plug>OriginalWORDBackward', 'B', { remap = false, silent = true })
 
--- -- Replace w and W behavior to b and B
+-- Replace w and W behavior to b and B
 vim.keymap.set('n', 'w', '<Plug>OriginalWordBackward', { remap = false })
 vim.keymap.set('n', 'W', '<Plug>OriginalWORDBackward', { remap = false })
 vim.keymap.set('v', 'w', '<Plug>OriginalWordBackward', { remap = false })
 vim.keymap.set('v', 'W', '<Plug>OriginalWORDBackward', { remap = false })
 
--- -- Replace b and B behavior to w and W
+-- Replace b and B behavior to w and W
 vim.keymap.set('n', 'b', '<Plug>OriginalWordForward', { remap = false })
 vim.keymap.set('n', 'B', '<Plug>OriginalWORDForward', { remap = false })
 vim.keymap.set('v', 'b', '<Plug>OriginalWordForward', { remap = false })
 vim.keymap.set('v', 'B', '<Plug>OriginalWORDForward', { remap = false })
+
+-- Replace backtick ` with ' single quote instead
+vim.keymap.set('n', "'", '`')
 
 -- diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'open diagnostic [q]uickfix list' })
@@ -130,10 +133,10 @@ vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'exit terminal mode' }
 --  use ctrl+<hjkl> to switch between windows
 --
 --  see `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<M-Left>', '<c-w><c-h>', { desc = 'move focus to the left window' })
-vim.keymap.set('n', '<M-Right>', '<c-w><c-l>', { desc = 'move focus to the right window' })
-vim.keymap.set('n', '<M-Down>', '<c-w><c-j>', { desc = 'move focus to the lower window' })
-vim.keymap.set('n', '<M-Up>', '<c-w><c-k>', { desc = 'move focus to the upper window' })
+vim.keymap.set('n', '<c-Left>', '<c-w><c-h>', { desc = 'move focus to the left window' })
+vim.keymap.set('n', '<c-Right>', '<c-w><c-l>', { desc = 'move focus to the right window' })
+vim.keymap.set('n', '<c-Down>', '<c-w><c-j>', { desc = 'move focus to the lower window' })
+vim.keymap.set('n', '<c-Up>', '<c-w><c-k>', { desc = 'move focus to the upper window' })
 
 -- note: some terminals have coliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<c-s-h>", "<c-w>h", { desc = "move window to the left" })
