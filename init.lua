@@ -109,7 +109,7 @@ vim.keymap.set('n', 'B', '<Plug>OriginalWORDForward', { remap = false })
 vim.keymap.set('v', 'b', '<Plug>OriginalWordForward', { remap = false })
 vim.keymap.set('v', 'B', '<Plug>OriginalWORDForward', { remap = false })
 
--- Replace backtick ` with ' single quote instead
+-- Replace ` backtick ` with ' single quote instead for mark behavior
 vim.keymap.set('n', "'", '`')
 
 -- diagnostic keymaps
@@ -317,15 +317,6 @@ require('lazy').setup({
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
-  },
-
-  {
-    'kylechui/nvim-surround',
-    version = '^3.0.0',
-    event = 'VeryLazy',
-    config = function()
-      require('nvim-surround').setup {}
-    end,
   },
 
   -- NOTE: Plugins can specify dependencies.
