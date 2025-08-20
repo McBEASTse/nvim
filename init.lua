@@ -129,9 +129,6 @@ vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'exit terminal mode' }
 -- vim.keymap.set('n', '<up>', '<cmd>echo "use k to move!!"<cr>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "use j to move!!"<cr>')
 
--- keybinds to make split navigation easier.
---  use ctrl+<hjkl> to switch between windows
---
 --  see `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<c-Left>', '<c-w><c-h>', { desc = 'move focus to the left window' })
 vim.keymap.set('n', '<c-Right>', '<c-w><c-l>', { desc = 'move focus to the right window' })
@@ -668,7 +665,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        pyright = {},
+        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -714,7 +711,6 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'prettierd',
-        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -784,20 +780,17 @@ require('lazy').setup({
         prettierd = {
           prepend_args = { '--single-attribute-per-line=false', '--print-width 600', '--html-whitespace-sensitivity=ignore' },
         },
-        prettier = {
-          prepend_args = { '--single-attribute-per-line=false', '--print-width 600', '--html-whitespace-sensitivity=ignore' },
-        },
       },
 
       formatters_by_ft = {
         lua = { 'stylua' },
-        scss = { 'prettierd', 'prettier', stop_after_first = true },
-        html = { 'prettierd', 'prettier', stop_after_first = true },
-        css = { 'prettierd', 'prettier', stop_after_first = true },
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
-        typescript = { 'prettierd', 'prettier', stop_after_first = true },
-        json = { 'prettierd', 'prettier', stop_after_first = true },
-        markdown = { 'prettierd', 'prettier', stop_after_first = true },
+        scss = { 'prettierd', stop_after_first = true },
+        html = { 'prettierd', stop_after_first = true },
+        css = { 'prettierd', stop_after_first = true },
+        javascript = { 'prettierd', stop_after_first = true },
+        typescript = { 'prettierd', stop_after_first = true },
+        json = { 'prettierd', stop_after_first = true },
+        markdown = { 'prettierd', stop_after_first = true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -979,7 +972,7 @@ require('lazy').setup({
       statusline.setup { use_icons = vim.g.have_nerd_font }
 
       require('mini.icons').setup {
-        style = 'ascii',
+        style = 'glyph',
       }
 
       -- You can configure sections in the statusline by overriding their
